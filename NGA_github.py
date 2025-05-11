@@ -29,8 +29,8 @@ from sklearn.model_selection import KFold
 #import data
 from sklearn.preprocessing import StandardScaler
 features = ['Smoking History', 'Tobacco snuff', 'Alcohol', 'Fruits', 'Veg', 'Red meat', 'Spicy food', 'CCI']
-df_train = pd.read_excel('/Users/jaadeoye/Desktop/NGA_data/train.xlsx')
-df_test = pd.read_excel('/Users/jaadeoye/Desktop/NGA_data/lagos_data.xlsx')
+df_train = pd.read_excel('[TRAINING_DATA_EXCEL]')
+df_test = pd.read_excel('[TEST_DATA_EXCEL]')
 x = df_train[features]
 y = df_train.O1
 a = df_test[features]
@@ -53,7 +53,7 @@ for fold, (train_index, test_index) in enumerate(kf.split(x,y)):
     print(f'For fold {fold}:')
     print(f'AUC: {roc_auc_score(y_test, y_pred)}')
 
-#train model
+#train model for external testing
 sm = SMOTEENN(random_state=0)
 x_res, y_res = sm.fit_resample(x,y)
 logreg =  LogisticRegression(random_state=123, class_weight='balanced')
